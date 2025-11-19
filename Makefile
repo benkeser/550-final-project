@@ -11,6 +11,9 @@ outputs/table_glyphosate_oxstress.png: code/01_make_table.R data/simulated_data.
 outputs/figure_glyphosate_iso.png: code/02_make_figure.R data/simulated_data.xlsx
 	Rscript code/02_make_figure.R
 
+install:
+	Rscript -e "if (!requireNamespace('renv')) install.packages('renv'); renv::restore()"
+	
 clean:
 	rm -f outputs/*.png
 	rm -f report.html
