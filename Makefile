@@ -12,7 +12,7 @@ outputs/figure_glyphosate_iso.png: code/02_make_figure.R data/simulated_data.xls
 	Rscript code/02_make_figure.R
 
 install:
-	Rscript -e "if (!requireNamespace('renv')) install.packages('renv'); renv::restore()"
+	Rscript -e "renv::restore(prompt = FALSE)"
 	
 clean:
 	rm -f outputs/*.png
