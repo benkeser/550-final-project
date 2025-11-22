@@ -1,4 +1,7 @@
-# repo description
+# build instructions 
+renv peer grading: in the terminal, run make install to synchronize the package library and then make to build the report.
+final instructions: run docker pull jarwari/final_project:latest and make docker-run to build the report. 
+## repo description
 This repository contains all code and workflows for generating the final report for the project.  
 The workflow is fully automated using a `Makefile`, and the package environment is managed with `renv`.
 ## Instructions

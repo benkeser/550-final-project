@@ -17,3 +17,13 @@ install:
 clean:
 	rm -f outputs/*.png
 	rm -f FinalReport.html
+	
+docker-run:
+	rm -rf report
+	mkdir report
+	docker run --rm \
+		-v "$(PWD)/report":/home/rstudio/project/final_report \
+		final_project
+
+	@echo "Report generated in the report/ directory."
+

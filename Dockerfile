@@ -1,0 +1,38 @@
+
+FROM rocker/tidyverse:4.5.1 AS base
+
+RUN mkdir /home/rstudio/project
+WORKDIR /home/rstudio/project
+
+RUN mkdir -p renv
+COPY renv.lock renv.lock
+COPY .Rprofile .Rprofile
+COPY renv/activate.R renv/activate.R
+COPY renv/settings.json renv/settings.json
+
+RUN mkdir renv/.cache
+ENV RENV_PATHS_CACHE renv/.cache
+
+RUN Rscript -e "renv::restore(prompt = FALSE)"
+
+###### DO NOT EDIT STAGE 1 BUILD LINES ABOVE ######
+
+FROM rocker/tidyverse:4.5.1
+
+RUN mkdir /home/rstudio/project
+
+WORKDIR /home/rstudio/project
+COPY --from=base /home/rstudio/project .
+
+ENV WHICH_CONFIG "default"
+COPY Makefile Makefile 
+COPY render_report.R render_report.R
+COPY FinalReport.Rmd FinalReport.Rmd
+
+RUN mkdir code
+RUN mkdir outputs
+RUN mkdir data
+RUN mkdir final_report
+COPY data/simulated_data.xlsx data
+COPY code code 
+CMD make && mv FinalReport.html final_report
