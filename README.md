@@ -1,6 +1,8 @@
 # repo description
 This repository contains all code and workflows for generating the final report for the project.  
 The workflow is fully automated using a `Makefile`, and the package environment is managed with `renv`.
+## Instructions
+Run make install and then make to synchronize the package library and build the report 
 ## file descriptions
 `code/01_make_table.R`
 - log tranforms outcomes, scales exposures by IQR, and performs unadjusted linear regressions
